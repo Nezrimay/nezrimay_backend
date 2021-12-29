@@ -7,6 +7,8 @@ import {
   Post,
   Put,
   UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CommonResponseInterface } from 'src/types/commonResponse.interface';
 import { AuthGuard } from 'src/user/guards/auth.guard';
@@ -24,6 +26,7 @@ export class ProductController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe())
   async createProduct(
     @Body()
     createProductDto: CreateProductDto,
@@ -32,6 +35,7 @@ export class ProductController {
   }
 
   @Put(':id')
+  @UsePipes(new ValidationPipe())
   async updateProduct(
     @Body() updateProductDto: CreateProductDto,
     @Param('id') productId: number,
